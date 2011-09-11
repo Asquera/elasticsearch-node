@@ -6,7 +6,7 @@ module ElasticSearch
       attr_accessor :process
 
       def initialize(cluster_name = "default")
-        self.process = IO.popen("#{Node.binary} -f", "r", :stdin=>:close)
+        self.process = IO.popen("#{Node.binary} -f", "r")
       end
       
       def port
