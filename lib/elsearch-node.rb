@@ -10,6 +10,10 @@ module ElasticSearch
       File.join(path, 'bin', 'elasticsearch')
     end
 
+    def self.version
+      `#{binary} -v`
+    end
+
     def self.lib
       File.join(path, 'lib')
     end
