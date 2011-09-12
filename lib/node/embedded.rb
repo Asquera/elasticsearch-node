@@ -19,7 +19,7 @@ module ElasticSearch
       end
 
       def ip
-        socket_address.host_string
+        "127.0.0.1" #socket_address.host_string
       end
 
       def client

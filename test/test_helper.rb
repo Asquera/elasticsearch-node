@@ -9,3 +9,5 @@ rescue LoadError
 end
 
 Bundler.require(:test, :default)
+
+require 'riot'

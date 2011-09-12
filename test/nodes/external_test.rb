@@ -6,6 +6,10 @@ context "An external node" do
     ElasticSearch::Node::External.new
   end
   
+  teardown do
+    topic.close
+  end
+  
   asserts(:ip).kind_of?(String)
   asserts(:port).kind_of?(Integer)
 end
