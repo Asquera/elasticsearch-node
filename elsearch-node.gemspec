@@ -19,5 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
+  s.add_development_dependency "echolon-http"
+  s.add_development_dependency "echolon-native"
   s.add_development_dependency "riot"
 end

@@ -3,10 +3,13 @@ require 'elsearch-node'
 module ElasticSearch
   module Node
     class External
+      include ElasticSearch::ClientProvider
+      
       attr_accessor :process
 
-      def initialize(cluster_name = "default")
+      def initialize(opts = {})
         self.process = IO.popen("#{Node.binary} -f", "r")
+        super(opts)
       end
       
       def port
@@ -23,10 +26,6 @@ module ElasticSearch
         end
 
         @ip
-      end
-
-      def client
-
       end
 
       def close

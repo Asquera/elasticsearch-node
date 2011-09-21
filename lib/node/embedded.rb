@@ -8,10 +8,14 @@ end
 module ElasticSearch
   module Node
     class Embedded
-      def initialize(cluster_name = "default")
+      include ElasticSearch::ClientProvider
+      
+      def initialize(opts = {})
+        cluster_name = opts[:cluster_name] || "default"
         settings = org.elasticsearch.common.settings.ImmutableSettings.settingsBuilder.put("cluster.name", cluster_name).put("gateway.type", "none").put("number_of_shards", 1)
         
         @node ||= org.elasticsearch.node.NodeBuilder.nodeBuilder.settings(settings).node
+        super(opts)
       end
 
       def port
@@ -19,7 +23,7 @@ module ElasticSearch
       end
 
       def ip
-        "127.0.0.1" #socket_address.host_string
+        socket_address.host_string
       end
 
       def client
