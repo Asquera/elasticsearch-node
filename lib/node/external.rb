@@ -8,6 +8,10 @@ module ElasticSearch
       attr_accessor :process
 
       def initialize(opts = {})
+        if opts[:config]
+          ENV["ES_HOME"] = ElasticSearch::Node.config(opts[:config])
+        end
+        
         self.process = IO.popen("#{Node.binary} -f", "r")
         super(opts)
       end

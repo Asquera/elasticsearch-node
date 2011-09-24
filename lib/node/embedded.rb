@@ -14,7 +14,7 @@ module ElasticSearch
         cluster_name = opts[:cluster_name] || "default"
         settings = org.elasticsearch.common.settings.ImmutableSettings.settingsBuilder.put("cluster.name", cluster_name).put("gateway.type", "none").put("number_of_shards", 1)
         
-        @node ||= org.elasticsearch.node.NodeBuilder.nodeBuilder.settings(settings).node
+        @node ||= org.elasticsearch.node.NodeBuilder.nodeBuilder.settings(settings).local(true).node
         super(opts)
       end
 
