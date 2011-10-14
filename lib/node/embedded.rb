@@ -9,12 +9,21 @@ module ElasticSearch
   module Node
     class Embedded
       include ElasticSearch::ClientProvider
-      
+      include 
       def initialize(opts = {})
-        cluster_name = opts[:cluster_name] || "default"
-        settings = org.elasticsearch.common.settings.ImmutableSettings.settingsBuilder.put("cluster.name", cluster_name).put("gateway.type", "none").put("number_of_shards", 1)
+        node_builder = org.elasticsearch.node.NodeBuilder.nodeBuilder.loadConfigSettings(true)
+        settings_builder = org.elasticsearch.common.settings.ImmutableSettings.settingsBuilder
         
-        @node ||= org.elasticsearch.node.NodeBuilder.nodeBuilder.settings(settings).local(true).node
+        if opts[:config]
+          settings_builder.put("path.home", opts[:config])
+        end
+        
+        settings_builder.put(opts[:settings]) if opts[:settings]
+        #pry opts[:settings]
+        #cluster_name = opts[:cluster_name] || "default"
+        #settings = org.elasticsearch.common.settings.ImmutableSettings.settingsBuilder.put("cluster.name", cluster_name)#.put("gateway.type", "none").put("number_of_shards", 1)#.put("http.type", "FooBarClazz")
+
+        @node ||= node_builder.settings(settings_builder).node
         super(opts)
       end
 
