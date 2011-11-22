@@ -12,4 +12,5 @@ Bundler.require(:test, :default)
 
 require 'riot'
 require 'echolon-http'
+require 'elsearch-node'
 require 'echolon-native' if RUBY_ENGINE == 'jruby'

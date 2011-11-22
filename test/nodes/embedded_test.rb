@@ -4,7 +4,7 @@ if 'jruby' == RUBY_ENGINE
   
   context "An embedded node" do
     setup do
-      ElasticSearch::Node::Embedded.new
+      ElasticSearch::Node::Embedded.new(:config => File.expand_path('configs/testing'))
     end
     
     teardown do

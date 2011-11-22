@@ -19,11 +19,10 @@ module ElasticSearch
         end
         
         settings_builder.put(opts[:settings]) if opts[:settings]
-        #pry opts[:settings]
-        #cluster_name = opts[:cluster_name] || "default"
-        #settings = org.elasticsearch.common.settings.ImmutableSettings.settingsBuilder.put("cluster.name", cluster_name)#.put("gateway.type", "none").put("number_of_shards", 1)#.put("http.type", "FooBarClazz")
-
-        @node ||= node_builder.settings(settings_builder).node
+        
+        tuple = org.elasticsearch.node.internal.InternalSettingsPerparer.prepareSettings(settings_builder.build, true)
+        org.elasticsearch.common.logging.log4j.LogConfigurator.configure(tuple.v1());
+        @node = node_builder.settings(settings_builder).node
         super(opts)
       end
 
