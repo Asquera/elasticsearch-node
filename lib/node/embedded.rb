@@ -9,7 +9,7 @@ module ElasticSearch
   module Node
     class Embedded
       include ElasticSearch::ClientProvider
-      include 
+
       def initialize(opts = {})
         node_builder = org.elasticsearch.node.NodeBuilder.nodeBuilder.loadConfigSettings(true)
         settings_builder = org.elasticsearch.common.settings.ImmutableSettings.settingsBuilder
