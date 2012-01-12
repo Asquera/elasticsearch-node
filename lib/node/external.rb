@@ -4,18 +4,20 @@ module ElasticSearch
   module Node
     class External
       include ElasticSearch::ClientProvider
-      
+
       attr_accessor :process
 
       def initialize(opts = {})
         if opts[:config]
           ENV["ES_HOME"] = ElasticSearch::Node.config(opts[:config])
         end
-        
-        self.process = IO.popen("#{Node.binary} -f", "r")
+
+        commandline = opts.map {|opt,value| "-Des.#{opt}=#{value}" }.join(" ")
+
+        self.process = IO.popen("#{Node.binary} -f #{commandline}", "r")
         super(opts)
       end
-      
+
       def port
         unless @port
           parse_ip_and_port
