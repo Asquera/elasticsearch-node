@@ -37,15 +37,23 @@ module ElasticSearch
       def close
         puts "killing #{process.pid}"
         Process.kill 15, process.pid
-        sleep 2
+        wait_for_closing
       end
-      
+
       private
         def parse_ip_and_port
           self.process.each do |line|
             if line =~ /\[http\s*\].*\/(.*):([0-9]+)/
               @ip = $1
               @port = Integer($2)
+              break
+            end
+          end
+        end
+
+        def wait_for_closing
+          self.process.each do |line|
+            if line =~ /node.*closed/
               break
             end
           end
