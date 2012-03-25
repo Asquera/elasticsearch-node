@@ -1,5 +1,33 @@
-require "bundler/gem_tasks"
+require 'rubygems' unless defined?(Gem)
+require 'rubygems/specification'
+require 'rake/gempackagetask'
 require 'rake/testtask'
+
+def gemspec
+  @gemspec ||= begin
+    file = File.expand_path("elasticsearch-node.gemspec")
+    ::Gem::Specification.load(file)
+  end
+end
+
+desc "Ensures the presence of elasticsearch binaries"
+task :elasticsearch do
+  unless File.exists?("elasticsearch")
+    raise "please fetch elasticsearch"
+  end
+end
+
+desc "Validates the gemspec"
+task :gemspec do
+  gemspec.validate
+end
+
+Rake::GemPackageTask.new(gemspec) do |pkg|
+  pkg.gem_spec = gemspec
+end
+
+task :package => :gemspec
+task :package => :elasticsearch
 
 Rake::TestTask.new(:test) do |test|
   test.libs << "test"
