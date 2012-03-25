@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_development_dependency "echolon-http"
-  s.add_development_dependency "echolon-native"
   s.add_development_dependency "riot"
+  s.add_development_dependency "faraday"
 end

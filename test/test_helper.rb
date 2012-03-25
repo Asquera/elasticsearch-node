@@ -1,16 +1,3 @@
-begin
-  # Require the preresolved locked set of gems.
-  require File.expand_path('../../.bundle/environment', __FILE__)
-rescue LoadError
-  # Fallback on doing the resolve at runtime.
-  require 'rubygems'
-  require 'bundler'
-  Bundler.setup
-end
-
-Bundler.require(:test, :default)
-
+require 'rubygems'
 require 'riot'
-require 'echolon-http'
-require 'elsearch-node'
-require 'echolon-native' if RUBY_ENGINE == 'jruby'
+require 'faraday'

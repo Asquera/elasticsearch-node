@@ -1,4 +1,4 @@
-require "elsearch-node/version"
+require "elasticsearch-node/version"
 require 'client_provider'
 
 module ElasticSearch 

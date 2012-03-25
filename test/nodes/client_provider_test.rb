@@ -3,10 +3,9 @@ require 'node/external'
 
 module DefaultClient
   def client
-    ElasticSearch::Client.new(:server => "http://#{self.ip}:#{self.port}", 
-                              :protocol => ElasticSearch::HTTP, 
-                              :plugins => [ElasticSearch::QueryPlugin, ElasticSearch::ResponseParser], 
-                              :logger => 'test/test.log')
+    conn = Faraday.new(:url => "http://#{self.ip}:#{self.port}") do |builder|
+      builder.adapter :net_http
+    end
   end
 end
 
@@ -15,10 +14,9 @@ context "An external node" do
     setup do
       ElasticSearch::Node::External.new do
         def client
-          ElasticSearch::Client.new(:server => "http://#{self.ip}:#{self.port}", 
-                                    :protocol => ElasticSearch::HTTP, 
-                                    :plugins => [ElasticSearch::QueryPlugin, ElasticSearch::ResponseParser], 
-                                    :logger => 'test/test.log')
+          conn = Faraday.new(:url => "http://#{self.ip}:#{self.port}") do |builder|
+            builder.adapter :net_http
+          end
         end
       end
     end
@@ -27,7 +25,7 @@ context "An external node" do
       topic.close
     end
     
-    asserts(:client).kind_of?(ElasticSearch::Client)
+    asserts(:client).kind_of?(Faraday::Connection)
   end
   
   context "with client module as option" do
@@ -39,7 +37,7 @@ context "An external node" do
       topic.close
     end
     
-    asserts(:client).kind_of?(ElasticSearch::Client)
+    asserts(:client).kind_of?(Faraday::Connection)
   end
   
   context "with default module" do
@@ -53,6 +51,6 @@ context "An external node" do
       topic.close
     end
     
-    asserts(:client).kind_of?(ElasticSearch::Client)
+    asserts(:client).kind_of?(Faraday::Connection)
   end
 end
