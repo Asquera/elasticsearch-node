@@ -6,7 +6,7 @@ rvm: 1.9.3
 #  - jruby-19mode
 #  - rbx-18mode
 #  - rbx-19mode
-env: EX_VERSION=0.19.1
+env: ES_VERSION=0.19.1
 #  - ES_VERSION=0.18.7
 #  - ES_VERSION=0.19.1
 before_script: "sh fetch_es.sh"
