@@ -1,4 +1,4 @@
-require 'elsearch-node'
+require 'elasticsearch-node'
 
 module ElasticSearch
   module Node

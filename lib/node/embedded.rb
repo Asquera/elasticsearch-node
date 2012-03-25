@@ -1,4 +1,4 @@
-require 'elsearch-node'
+require 'elasticsearch-node'
 require 'jruby'
 
 Dir["#{ElasticSearch::Node.lib}/*.jar"].each do |jar|
