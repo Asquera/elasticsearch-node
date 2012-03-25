@@ -13,7 +13,8 @@ end
 desc "Ensures the presence of elasticsearch binaries"
 task :elasticsearch do
   unless File.exists?("elasticsearch")
-    raise "please fetch elasticsearch"
+    ENV["ES_VERSION"] = "0.19.1"
+    `sh es_fetch.sh`
   end
 end
 
