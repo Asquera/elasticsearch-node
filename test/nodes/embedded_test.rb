@@ -1,6 +1,6 @@
 if 'jruby' == RUBY_ENGINE
   require 'test_helper'
-  require 'node/embedded'
+  require 'elasticsearch-node/embedded'
   
   context "An embedded node" do
     setup do

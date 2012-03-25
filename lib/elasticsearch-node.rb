@@ -1,5 +1,5 @@
 require "elasticsearch-node/version"
-require 'client_provider'
+require 'elasticsearch-node/client_provider'
 
 module ElasticSearch 
   module Node

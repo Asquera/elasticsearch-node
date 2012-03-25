@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'node/external'
+require 'elasticsearch-node/external'
 
 context "An external node" do
   setup do

@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'node/external'
+require 'elasticsearch-node/external'
 
 module DefaultClient
   def client
