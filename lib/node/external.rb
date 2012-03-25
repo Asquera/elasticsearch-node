@@ -35,7 +35,7 @@ module ElasticSearch
       end
 
       def close
-        puts "killing #{process.pid}"
+        $stderr.puts "Killing ElasticSearch node: #{process.pid}"
         Process.kill 15, process.pid
         wait_for_closing
       end
