@@ -1,5 +1,7 @@
 # elasticsearch-node
 
+[![Build Status](https://secure.travis-ci.org/Asquera/elasticsearch-node.png?branch=master)](http://travis-ci.org/Asquera/elasticsearch-node)
+
 `elasticsearch-node` is a Ruby library to start, manipulate and shutdown elasticsearch nodes in a controlled fashion. On JRuby, it also provides a native binding to this functionality. Its very handy in testing environments.
 
 ## Usage
