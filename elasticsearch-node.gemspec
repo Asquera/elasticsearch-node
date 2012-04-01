@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "elasticsearch-node/version"
 
 Gem::Specification.new do |s|
-  s.name        = "elsearch-node"
+  s.name        = "elasticsearch-node"
   s.version     = Elsearch::Node::VERSION
   s.authors     = ["Florian Gilcher"]
   s.email       = ["florian.gilcher@asquera.de"]
