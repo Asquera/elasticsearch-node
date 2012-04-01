@@ -10,14 +10,6 @@ def gemspec
   end
 end
 
-desc "Ensures the presence of elasticsearch binaries"
-task :elasticsearch do
-  unless File.exists?("elasticsearch")
-    ENV["ES_VERSION"] = "0.19.1"
-    `sh es_fetch.sh`
-  end
-end
-
 desc "Validates the gemspec"
 task :gemspec do
   gemspec.validate
@@ -28,7 +20,6 @@ Rake::GemPackageTask.new(gemspec) do |pkg|
 end
 
 task :package => :gemspec
-task :package => :elasticsearch
 
 Rake::TestTask.new(:test) do |test|
   test.libs << "test"
