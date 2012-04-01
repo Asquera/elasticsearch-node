@@ -4,6 +4,24 @@
 
 `elasticsearch-node` is a Ruby library to start, manipulate and shutdown elasticsearch nodes in a controlled fashion. On JRuby, it also provides a native binding to this functionality. Its very handy in testing environments.
 
+## Installation
+
+```
+gem install elasticsearch-node
+```
+
+After installation, make sure to run:
+
+```
+install_elasticsearch
+```
+
+For legacy versions, use:
+
+```
+ES_VERSION=0.18.7
+```
+
 ## Usage
 
 ```
