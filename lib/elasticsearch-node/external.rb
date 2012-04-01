@@ -5,7 +5,7 @@ module ElasticSearch
     class External
       include ElasticSearch::ClientProvider
 
-      attr_accessor :process
+      attr_accessor :pid
 
       def initialize(opts = {})
         if opts[:config]
@@ -14,7 +14,10 @@ module ElasticSearch
 
         commandline = opts.map {|opt,value| "-Des.#{opt}=#{value}" }.join(" ")
 
-        self.process = IO.popen("#{Node.binary} -f #{commandline}", "r")
+        capture_ip_and_port do
+          self.pid = Kernel.spawn("#{Node.binary} -f #{commandline}", :out => :out, :err => :err)
+        end
+
         super(opts)
       end
 
@@ -35,28 +38,31 @@ module ElasticSearch
       end
 
       def close
-        $stderr.puts "Killing ElasticSearch node: #{process.pid}"
-        Process.kill 15, process.pid
-        wait_for_closing
+        $stderr.puts "Killing ElasticSearch node: #{pid}"
+        Process.kill 15, pid
+        Process.waitpid pid
       end
 
       private
-        def parse_ip_and_port
-          self.process.each do |line|
+        def capture_ip_and_port(&block)
+          read, write = IO.pipe
+
+          old_stdout = $stdout.dup
+          $stdout.reopen(write)
+
+          yield
+
+          read.each do |line|
+            old_stdout << line
+
             if line =~ /\[http\s*\].*\/(.*):([0-9]+)/
               @ip = $1
               @port = Integer($2)
               break
             end
           end
-        end
 
-        def wait_for_closing
-          self.process.each do |line|
-            if line =~ /node.*closed/
-              break
-            end
-          end
+          $stdout.reopen(old_stdout)
         end
     end
   end
