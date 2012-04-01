@@ -40,7 +40,11 @@ module ElasticSearch
       def close
         $stderr.puts "Killing ElasticSearch node: #{pid}"
         Process.kill 15, pid
-        Process.waitpid pid
+        begin
+          Process.waitpid pid
+        rescue Errno::ECHILD
+          # Possible, if process is already gone
+        end
       end
 
       private
