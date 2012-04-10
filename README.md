@@ -83,10 +83,6 @@ Please be aware that this library does not add any `at_exit`-hooks to your appli
 
     at_exit { node.close }
 
-## Flaws
-
-* No windows support at the moment.
-
 ### License
 
 See `COPYING.md` for all details.
