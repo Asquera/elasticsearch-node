@@ -14,26 +14,25 @@ module ElasticSearch
 
         commandline = opts.map {|opt,value| "-Des.#{opt}=#{value}" }.join(" ")
 
-        capture_ip_and_port do
-          self.pid = Kernel.spawn("#{Node.binary} -f #{commandline}", :out => :out, :err => :err)
+        if Kernel.respond_to? :spawn
+          capture_ip_and_port do
+            self.pid = Kernel.spawn("#{Node.binary} -f #{commandline}", :out => :out, :err => :err)
+          end
+        else
+          process = IO.popen("#{Node.binary} -f #{commandline}", "r")
+          parse_ip_and_port(process)
+          start_slurper(process)
+          self.pid = process.pid
         end
 
         super(opts)
       end
 
       def port
-        unless @port
-          parse_ip_and_port
-        end
-
         @port
       end
 
       def ip
-        unless @ip
-          parse_ip_and_port
-        end
-
         @ip
       end
 
@@ -67,6 +66,21 @@ module ElasticSearch
           end
 
           $stdout.reopen(old_stdout)
+        end
+
+        def parse_ip_and_port(process)
+          process.each do |line|
+            $stdout << line
+            if line =~ /\[http\s*\].*\/(.*):([0-9]+)/
+              @ip = $1
+              @port = Integer($2)
+              break
+            end
+          end
+        end
+
+        def start_slurper(process)
+          Thread.new { process.each { |line| $stdout << line } }
         end
     end
   end
