@@ -86,7 +86,6 @@ Please be aware that this library does not add any `at_exit`-hooks to your appli
 ## Flaws
 
 * No windows support at the moment.
-* No 1.8 support at the moment.
 
 ### License
 
