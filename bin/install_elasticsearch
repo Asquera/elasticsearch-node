@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-es_version = ENV['ES_VERSION'] || "0.19.1"
+es_version = ENV['ES_VERSION'] || "0.19.2"
 
 puts "Installing elasticsearch-#{es_version}. 
 To install a different version, specify it using the ES_VERSION environment variable.
