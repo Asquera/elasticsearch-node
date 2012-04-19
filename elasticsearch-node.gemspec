@@ -4,7 +4,7 @@ require "elasticsearch-node/version"
 
 Gem::Specification.new do |s|
   s.name        = "elasticsearch-node"
-  s.version     = Elsearch::Node::VERSION
+  s.version     = ElasticSearch::Node::VERSION
   s.authors     = ["Florian Gilcher"]
   s.email       = ["florian.gilcher@asquera.de"]
   s.homepage    = "http://github.com/Asquera/elasticsearch-node"

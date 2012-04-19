@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.7.1
+
+- Added plugin installation
+
 ## Version 0.7.0
 
 - Added windows compatibility
