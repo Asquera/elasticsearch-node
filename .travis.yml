@@ -7,4 +7,4 @@ rvm:
 env:
   - ES_VERSION=0.18.7
   - ES_VERSION=0.19.2
-before_script: "ruby -ilib -S bin/install_elasticsearch"
+before_script: "ruby -Ilib bin/install_elasticsearch"
