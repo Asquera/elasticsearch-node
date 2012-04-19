@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'elasticsearch-node'
+
 es_version = ENV['ES_VERSION'] || "0.19.2"
 
 puts "Installing elasticsearch-#{es_version}. 
@@ -12,3 +14,14 @@ Dir.chdir(File.dirname(File.dirname(__FILE__)))
 `tar xvf elasticsearch.tar.gz`
 #mv elasticsearch-$ES_VERSION elasticsearch
 File.unlink "elasticsearch.tar.gz"
+
+es_plugins = ENV['ES_PLUGINS'] && ENV['ES_PLUGINS'].split
+
+if es_plugins
+  es_plugins.each do |plugin|
+    #elasticsearch/elasticsearch-river-couchdb
+    puts "installing plugin #{plugin}"
+    binary = File.join(ElasticSearch::Node.path, "bin", "plugin")
+    `#{binary} -install #{plugin}`
+  end
+end
