@@ -1,4 +1,7 @@
 # Changelog
+## Version 0.7.2
+
+- Default ES version bumped to 0.19.4
 
 ## Version 0.7.1
 
