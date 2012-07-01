@@ -38,7 +38,7 @@ module ElasticSearch
     end
 
     def self.version
-      @version || ENV["ES_VERSION"] || "0.19.2"
+      @version || ENV["ES_VERSION"] || "0.19.7"
     end
 
     def self.windows?

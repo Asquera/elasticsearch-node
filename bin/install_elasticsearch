@@ -2,7 +2,7 @@
 
 require 'elasticsearch-node'
 
-es_version = ENV['ES_VERSION'] || "0.19.4"
+es_version = ENV['ES_VERSION'] || "0.19.7"
 
 puts "Installing elasticsearch-#{es_version}. 
 To install a different version, specify it using the ES_VERSION environment variable.
