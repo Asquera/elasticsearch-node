@@ -21,10 +21,6 @@ module ElasticSearch
       end
     end
 
-    def self.version
-      `#{binary} -v`
-    end
-
     def self.lib
       File.join(path, 'lib')
     end
