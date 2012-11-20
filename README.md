@@ -29,9 +29,9 @@ require 'elasticsearch-node/external'
 require 'elasticsearch-node/embedded'
 require 'elasticsearch-node/remote'
 
-external = ElasticSearch::Node::External "gateway.type" => "none"
-embedded = ElasticSearch::Node::Embedded "gateway.type" => "none"
-remote   = ElasticSearch::Node::Remote '127.0.0.1', 9200
+external = ElasticSearch::Node::External.new "gateway.type" => "none"
+embedded = ElasticSearch::Node::Embedded.new "gateway.type" => "none"
+remote   = ElasticSearch::Node::Remote.new '127.0.0.1', 9200
 
 [external, embedded, remote].each do |node|
   puts node.ip
