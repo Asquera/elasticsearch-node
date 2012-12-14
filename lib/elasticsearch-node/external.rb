@@ -14,7 +14,7 @@ module ElasticSearch
 
         commandline = opts.map {|opt,value| "-Des.#{opt}=#{value}" }.join(" ")
 
-        if Kernel.respond_to? :spawn
+        if !(RUBY_PLATFORM == 'java') && (Kernel.respond_to? :spawn)
           capture_ip_and_port do
             self.pid = Kernel.spawn("#{Node.binary} -f #{commandline}", :out => :out, :err => :err)
           end
