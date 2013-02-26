@@ -15,7 +15,7 @@ Dir.chdir(File.dirname(File.dirname(__FILE__)))
 if File.exists? es_dirname
   puts 'elasticsearch already installed, skipping install'
 else
-  `curl https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-#{es_version}.tar.gz -L -o elasticsearch.tar.gz`
+  `curl http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-#{es_version}.tar.gz -L -o elasticsearch.tar.gz`
   `tar xvf elasticsearch.tar.gz`
   #mv elasticsearch-$ES_VERSION elasticsearch
   File.unlink "elasticsearch.tar.gz"
