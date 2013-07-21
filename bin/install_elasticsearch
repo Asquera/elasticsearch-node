@@ -4,17 +4,25 @@ require 'elasticsearch-node'
 
 es_version = ENV['ES_VERSION'] || "0.90.2"
 
-puts "Installing elasticsearch-#{es_version}.
+es_dirname = "elasticsearch-#{es_version}"
+
+puts "Installing #{es_dirname}.
 To install a different version, specify it using the ES_VERSION environment variable.
     ES_VERSION=0.18.7 install_elasticsearch"
 
 Dir.chdir(File.dirname(File.dirname(__FILE__)))
 
-`curl https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-#{es_version}.tar.gz -L -o elasticsearch.tar.gz`
-`tar xvf elasticsearch.tar.gz`
-#mv elasticsearch-$ES_VERSION elasticsearch
-File.unlink "elasticsearch.tar.gz"
+# install elasticsearch if not yet installed
+if File.exists? es_dirname
+  puts 'elasticsearch already installed, skipping install'
+else
+  `curl http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-#{es_version}.tar.gz -L -o elasticsearch.tar.gz`
+  `tar xvf elasticsearch.tar.gz`
+  #mv elasticsearch-$ES_VERSION elasticsearch
+  File.unlink "elasticsearch.tar.gz"
+end
 
+# install elasticsearch plugins
 es_plugins = ENV['ES_PLUGINS'] && ENV['ES_PLUGINS'].split
 
 if es_plugins
