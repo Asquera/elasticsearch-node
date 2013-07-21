@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.7.5
+
+- Default ES version bumped to 0.90.2
+- Use new download location
+
 ## Version 0.7.3
 
 - Default ES version bumped to 0.19.7

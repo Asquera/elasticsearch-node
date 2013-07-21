@@ -4,6 +4,6 @@ rvm:
   - 1.9.3
   - jruby-19mode
 env:
-  - ES_VERSION=0.18.7
-  - ES_VERSION=0.19.4
+  - ES_VERSION=0.20.6
+  - ES_VERSION=0.90.2
 before_script: "ruby -Ilib bin/install_elasticsearch"
