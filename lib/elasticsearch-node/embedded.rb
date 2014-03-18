@@ -20,7 +20,7 @@ module ElasticSearch
         
         settings_builder.put(opts[:settings]) if opts[:settings]
         
-        tuple = org.elasticsearch.node.internal.InternalSettingsPerparer.prepareSettings(settings_builder.build, true)
+        tuple = org.elasticsearch.node.internal.InternalSettingsPreparer.prepareSettings(settings_builder.build, true)
         org.elasticsearch.common.logging.log4j.LogConfigurator.configure(tuple.v1());
         @node = node_builder.settings(settings_builder).node
         super(opts)
